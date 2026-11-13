@@ -1,0 +1,9 @@
+{
+  "product": "offline",
+  "version": "1.0.0",
+  "tag": "offline-v1.0.0",
+  "label": "脱机版",
+  "base": "/personal-workbench-offline/",
+  "commit": "67cf1e43eb13fe3e6903ab6272047b13a77f0010",
+  "build": "npm ci; npm run build:offline"
+}

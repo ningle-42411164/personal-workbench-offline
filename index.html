@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN" class="splash-pending">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#244d43">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="工作台">
+    <title>Personal Workbench</title>
+    <link rel="icon" href="/personal-workbench-offline/favicon-64.png" type="image/png" sizes="64x64">
+    <link rel="apple-touch-icon" href="/personal-workbench-offline/apple-touch-icon.png" sizes="180x180">
+    <!-- Vue 脚本运行前先用静态启动层遮住页面，避免首帧出现工作台；组件接管后移除它。 -->
+    <style>
+      html, body { background: var(--page, #f5f4ef); }
+      #boot-splash { display: none; }
+      .splash-pending main { visibility: hidden; }
+      .splash-pending #boot-splash {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1001;
+        background: #f5f4ef url('/personal-workbench-offline/launch-splash.png') center / cover no-repeat;
+      }
+    </style>
+    <!-- 在挂载前检查会话标记，同会话刷新时取消隐藏；这个标记不含事项数据。 -->
+    <script>
+      // 静态启动层早于 Vue 出现，需提前读取同一偏好；关闭时不显示启动层，也不隐藏工作台。
+      try {
+        if (localStorage.getItem('personal-workbench.offline.splash.enabled.v1') === 'false') {
+          document.documentElement.classList.remove('splash-pending');
+        }
+      } catch {
+        // 配置读取异常按默认开启处理，继续执行原有会话判断。
+      }
+      try {
+        if (sessionStorage.getItem('personal-workbench.offline.splash.seen.v1')) {
+          document.documentElement.classList.remove('splash-pending');
+        }
+      } catch {
+        // 无法使用 sessionStorage 时仍展示启动页。
+      }
+      setTimeout(() => { document.documentElement.classList.remove('splash-pending'); document.getElementById('boot-splash')?.remove(); }, 6000);
+    </script>
+    <script type="module" crossorigin src="/personal-workbench-offline/assets/index-C6b9tHfB.js"></script>
+    <link rel="stylesheet" crossorigin href="/personal-workbench-offline/assets/index-DxNHhnLR.css">
+  <link rel="manifest" href="/personal-workbench-offline/manifest.webmanifest"></head>
+  <body>
+    <div id="boot-splash" aria-hidden="true"></div>
+    <div id="app"></div>
+  </body>
+</html>
