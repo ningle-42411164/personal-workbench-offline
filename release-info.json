@@ -1,10 +1,10 @@
 {
   "product": "offline",
-  "version": "1.1.0",
-  "tag": "offline-v1.1.0",
+  "version": "1.1.1",
+  "tag": "offline-v1.1.1",
   "label": "脱机版",
   "base": "/personal-workbench-offline/",
-  "releaseTitle": "脱机版 v1.1.0｜本机成就馆与项目完成礼炮",
-  "commit": "af78c3ade648665c9bd602fb4a0747dd0e5545df",
+  "releaseTitle": "脱机版 v1.1.1｜独立发布与可续跑的自动发行流程",
+  "commit": "0ac74b9534ea42c443021d79c4ce04e96c197a6b",
   "build": "npm ci; npm run build:offline"
 }
